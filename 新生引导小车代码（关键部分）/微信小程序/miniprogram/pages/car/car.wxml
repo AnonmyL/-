@@ -1,0 +1,50 @@
+<!--miniprogram/pages/car/car.wxml-->
+<view class='topTabSwiper'>
+    <view class='tab  {{currentData == 0 ? "tabBorer" : ""}}'  data-current = "0" bindtap='checkCurrent'>预约小车</view>
+    <view class='tab  {{currentData == 1 ? "tabBorer" : ""}}'  data-current = "1" bindtap='checkCurrent'>小车位置</view>
+</view>
+<swiper current="{{currentData}}" class='swiper' style="height:600px;" duration="300" bindchange="bindchange">
+  <swiper-item>
+  <view class="body">
+   <form bindsubmit="formSubmit" bindreset="formReset">
+       <view class="sectionone">
+     <view class="title"> 模式选择 </view>
+        <radio-group name="radio-group" bindchange="show" >
+            <label><radio value="enroll"  />报到引领</label>
+            <label><radio value="tour" />校园导览</label>
+        </radio-group>
+    </view>
+    <view class="sectionone">
+        <view class="title">阶段选择</view>
+         <radio-group name="radio-group" bindchange="show1">
+            <label><radio value="1" disabled="{{showStep}}"/>领取报道材料</label>
+            <label><radio value="2" disabled="{{showStep}}"/>领取宿舍钥匙</label>
+             <label><radio value="3" disabled="{{showStep}}"/>体检</label>
+        </radio-group>
+    </view>
+        
+    <view class="section section_gap">
+      <picker mode="time" value="{{time}}" start="07:00" end="21:00" bindchange="bindTimeChange">
+        <view class="picker" >
+            预约开始时间: {{time}}
+        </view>
+    </picker>
+     <view class="sectiontitle">从当前预约时间开始的20分钟是您专属的小车服务时间</view>
+    </view>
+    <view class="btn-area">
+  
+        <button class ="button2" formType="submit">Submit</button>
+        <button  class ="button1" formType="reset">Reset</button>
+    </view>
+</form>
+ </view>
+</swiper-item>
+  <swiper-item>
+    <map id="map" longitude="116.35765585552397" latitude="39.96095349639502" scale="20" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" enable-room="true" show-location style="width: 100%; height: 400px;" ></map>
+       <view class="btn-area">
+        <button bindtap='ClickOn'>开启小车</button>
+        <button bindtap='ClickOff'>暂停小车</button>
+        <button bindtap="getJ_W">GPS console</button>
+    </view>
+   </swiper-item>  
+  </swiper>

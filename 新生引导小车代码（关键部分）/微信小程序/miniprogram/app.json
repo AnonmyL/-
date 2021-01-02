@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/car/car"
+  ],
+  "window": {
+    "backgroundColor": "#FF99CC",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FF99CC",
+    "navigationBarTitleText": "新生智能引导小车",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}
