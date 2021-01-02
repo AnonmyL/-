@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-
+#代码来自商家，直接调用即可
 import RPi.GPIO as GPIO
 import config1
 import math
