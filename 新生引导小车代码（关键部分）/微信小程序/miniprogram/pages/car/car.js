@@ -21,6 +21,7 @@ Page({
     car_latitude:"39.96095349639502",//小车纬度
     getJW_setInter:"",//得经纬度的计时器函数的编号
     ifshowMarkers:false,
+    //位置指示标记设置
     markers: [{
       iconPath: '../../images/ditudingweidian-xuanzhong.png',
       id: 0,
@@ -72,7 +73,7 @@ Page({
   
   gps_data: function () {
     let that = this;
-    //从oneNET请求我们的Wi-Fi气象站的数据
+    //从oneNET请求我们的GPS的数据
     const requestTask = wx.request({
       url: 'https://api.heclouds.com/devices/639504816/datapoints?datastream_id=latitude,longitude&limit=10',
       header: {
@@ -111,9 +112,11 @@ Page({
     })
   },
 
+  //表单提交
   formSubmit: function (e) {
     var that = this;
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    //表单内容上传至onenet
     wx.request({
       url: 'https://api.heclouds.com/devices/639504816/datapoints?type=3',
       header: {
@@ -133,16 +136,18 @@ Page({
       }
     })    
   },
+  //重置表单
   formReset: function () {
     console.log('form发生了reset事件')
   },
+  //预约时间
   bindTimeChange: function (e) {
     // console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       time: e.detail.value
     })
   },
- 
+ //单项选择在选择导览模式时禁止选择下面的具体模式选项
   show: function (e) {
     console.log('radio模式选择进行了操作', e)
     console.log(e.detail.value)
@@ -159,6 +164,7 @@ Page({
     }
     console.log(this.data.mode)
   },
+  //数据存储
   show1: function (e) {
     console.log('radio模式选择进行了操作', e)
     console.log(e.detail.value)
@@ -191,6 +197,7 @@ Page({
       })
     }
   },
+  //定时从onenet请求小车的实时经纬度，在微信小程序显示实时位置
   getJ_W: function () {
     let that = this;
     let alongitude="";
@@ -235,23 +242,6 @@ Page({
             console.log("marker.alatitude=" + that.data.markers[0].latitude)
           }
         })
-        // console.log("每隔5s获得一次经纬度")
-        // //发送给刘组
-        // var send_result = gcoord.transform(
-        //   [alongitude, alatitude],    // 经纬度坐标
-        //   gcoord.WGS84,                 // 当前坐标系 硬件GPS
-        //   gcoord.BD09);
-        // wx.request({
-        //   url: 'http://182.92.86.34:8099/apis/sendpos',
-        //   method: 'GET',
-        //   data:{
-        //     latitude: send_result[1],
-        //     longitude: send_result[0], 
-        //   },
-        //   success: function (res) {
-        //     console.log("发送给合作组"+JSON.stringify(res))
-        //   }
-        // })
       }
       , 10000); 
   },
@@ -260,6 +250,7 @@ Page({
     let that=this;
     clearInterval(that.data.getJW_setInter)
   },
+  //小车开始导航
   ClickOn: function () {
     /* if (app.globalData.userInfo.nickName != '李行')
        return;*/
@@ -285,6 +276,7 @@ Page({
      })    
      
    },
+  //小车暂停导航
    ClickOff: function () {
      /*if (app.globalData.userInfo.nickName != '李行')
        return;*/
