@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
+#代码来自商家，直接调用即可，注意这里的代码是USB连接使用GPS，如果使用排插连接，ttyUSNB0要换成ttyS0
 import serial
 import RPi.GPIO as GPIO
 
